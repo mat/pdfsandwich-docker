@@ -1,0 +1,7 @@
+#!/bin/sh
+set -euo pipefail
+
+tmpdir=$(mktemp -d)
+cp $1 $tmpdir/$(basename $1)
+docker run -v $tmpdir:/pdfs matthiasluedtke/pdfsandwich:latest
+mv -n $tmpdir/*.pdf $(dirname $1)
